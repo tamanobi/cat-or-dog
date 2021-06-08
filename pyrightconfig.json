@@ -1,0 +1,15 @@
+{
+  "venvPath": ".venv",
+  "stubPath": "",
+  "executionEnvironments": [
+    {
+      "root": "src"
+    },
+    {
+      "root": "tests",
+      "extraPaths": [
+        "src"
+      ]
+    }
+  ]
+}
