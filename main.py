@@ -41,6 +41,7 @@ import numpy as np
 
 from PIL import Image
 
+
 def imshow(img):
     img = img / 2 + 0.5  # unnormalize
     npimg = img.numpy()
@@ -52,7 +53,7 @@ def imshow(img):
 
 # get some random training images
 dataiter = iter(trainloader)
-images, labels = dataiter.next() # type: ignore
+images, labels = dataiter.next()  # type: ignore
 
 # show images
 # imshow(utils.make_grid(images))
