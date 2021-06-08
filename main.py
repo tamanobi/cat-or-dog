@@ -112,3 +112,6 @@ for epoch in range(2):  # loop over the dataset multiple times
             running_loss = 0.0
 
 print("Finished Training")
+
+PATH = "./cifar_net.pth"
+torch.save(net.state_dict(), PATH)
