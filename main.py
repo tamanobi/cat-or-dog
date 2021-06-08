@@ -1,5 +1,6 @@
 import torch
-import torchvision
+from torchvision import datasets
+from torchvision import utils
 import torchvision.transforms as transforms
 
 transform = transforms.Compose(
@@ -8,17 +9,17 @@ transform = transforms.Compose(
 
 batch_size = 4
 
-trainset = torchvision.datasets.CIFAR10(
+trainset = datasets.CIFAR10(
     root="./data", train=True, download=True, transform=transform
 )
-trainloader = torch.utils.data.DataLoader(
+trainloader = utils.data.DataLoader(
     trainset, batch_size=batch_size, shuffle=True, num_workers=2
 )
 
-testset = torchvision.datasets.CIFAR10(
+testset = datasets.CIFAR10(
     root="./data", train=False, download=True, transform=transform
 )
-testloader = torch.utils.data.DataLoader(
+testloader = utils.data.DataLoader(
     testset, batch_size=batch_size, shuffle=False, num_workers=2
 )
 
@@ -38,21 +39,23 @@ classes = (
 import matplotlib.pyplot as plt
 import numpy as np
 
-# functions to show an image
-
+from PIL import Image
 
 def imshow(img):
     img = img / 2 + 0.5  # unnormalize
     npimg = img.numpy()
-    plt.imshow(np.transpose(npimg, (1, 2, 0)))
-    plt.show()
+    im = Image.fromarray(np.transpose(npimg, (1, 2, 0)))
+    im.save("sample.png")
+    # plt.imshow()
+    # plt.show()
 
 
 # get some random training images
 dataiter = iter(trainloader)
-images, labels = dataiter.next()
+images, labels = dataiter.next() # type: ignore
 
 # show images
-imshow(torchvision.utils.make_grid(images))
+# imshow(utils.make_grid(images))
+utils.save_image(images / 2 + 0.5, "test.png")
 # print labels
 print(" ".join("%5s" % classes[labels[j]] for j in range(batch_size)))
